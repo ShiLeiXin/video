@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qf.dao.SubjectMapper" >
+<mapper namespace="com.qf.dao.SubjectMapper">
+
   <resultMap id="BaseResultMap" type="com.qf.pojo.Subject" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+      <collection property="courseList" javaType="list" ofType="com.qf.pojo.Course">
+          <result column="course_title" property="courseTitle" jdbcType="LONGVARCHAR"/>
+          <result column="course_desc" property="courseDesc" jdbcType="LONGVARCHAR" />
+          <collection property="videoList" ofType="com.qf.pojo.Video">
+              <id column="id" property="id" jdbcType="INTEGER" />
+              <result column="title" property="title" jdbcType="VARCHAR" />
+              <result column="time" property="time" jdbcType="INTEGER" />
+              <result column="speaker_id" property="speakerId" jdbcType="INTEGER" />
+              <result column="course_id" property="courseId" jdbcType="INTEGER" />
+              <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+              <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+              <result column="play_num" property="playNum" jdbcType="INTEGER" />
+          </collection>
+      </collection>
   </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -161,4 +177,13 @@
     set subject_name = #{subjectName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="selectAll"  resultMap="BaseResultMap">
+        select c.course_title, c.course_desc, v.image_url, v.title, v.video_url,v.image_url, v.play_num, v.time
+        FROM subject s
+        inner JOIN course  c on c.subject_id =s.id
+        inner join video  v on v.course_id= c.id
+        where s.id=#{id}
+    </select>
+
 </mapper>
