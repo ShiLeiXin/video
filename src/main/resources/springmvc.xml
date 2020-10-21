@@ -11,24 +11,16 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <bean class="com.qf.utils.StringtoQueryVo"></bean>
-            </set>
-        </property>
-    </bean>
 
     <!-- 扫描对应的包 -->
     <context:component-scan base-package="com.qf"></context:component-scan>
 
     <!-- 开启springmvc注解 -->
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:annotation-driven/>
 
     <!-- 不拦截静态资源 -->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 
-    <bean id="myExceptionResolver" class="com.qf.exception.MyExceptionResoler"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"></property>

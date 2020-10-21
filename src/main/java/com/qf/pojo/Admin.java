@@ -1,5 +1,8 @@
 package com.qf.pojo;
 
+import lombok.Data;
+
+@Data
 public class Admin {
     private Integer id;
 

@@ -4,7 +4,9 @@ import com.qf.pojo.Admin;
 import com.qf.pojo.AdminExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdminMapper {
     int countByExample(AdminExample example);
 

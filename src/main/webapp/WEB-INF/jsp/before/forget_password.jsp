@@ -24,6 +24,7 @@
                 if (null != email.val() && email.val() != "") {
                     //alert("====");
                     var params = {"email": email.val()};
+
                     email.load("${pageContext.request.contextPath}/user/sendEmail", params, function (data) {
                         if (data == "hasNoUser") {
                             alert("邮箱未注册")
@@ -71,7 +72,7 @@
                     <span>通过注册邮箱和手机号重设密码</span>
                 </div>
                 <div class="form_back">
-                    <a href="${pageContext.request.contextPath}/WEB-INF/jsp/before/index.jsp">返回立即登录</a>
+                    <a href="/user/show">返回立即登录</a>
                 </div>
             </div>
             <div class="form_body">

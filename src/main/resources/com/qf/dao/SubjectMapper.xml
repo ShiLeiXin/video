@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qf.dao.SubjectMapper" >
+
   <resultMap id="BaseResultMap" type="com.qf.pojo.Subject" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+
+    <collection property="courseList" ofType="com.qf.pojo.Course">
+      <id column="course_id" property="id"></id>
+      <result column="course_title" property="courseTitle"></result>
+      <result column="subject_id" property="subjectId"></result>
+      <result column="course_desc" property="courseDesc" jdbcType="LONGVARCHAR"></result>
+
+      <collection property="videoList" ofType="com.qf.pojo.Video">
+        <id column="video_id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="time" property="time"></result>
+        <result column="video_url" property="videoUrl"></result>
+        <result column="image_url" property="imageUrl"></result>
+        <result column="play_num" property="playNum"></result>
+        <result column="detail" property="detail" jdbcType="LONGVARCHAR"></result>
+        <result column="speaker_id" property="speakerId"></result>
+        <result column="course_id" property="courseId"></result>
+      </collection>
+    </collection>
   </resultMap>
+
+  <select id="selectSubjectById" resultMap="BaseResultMap">
+    select  s.id, s.subject_name,  c.id, c.course_title, c.subject_id, c.course_desc,
+     v.id video_id, v.title, v.time, v.speaker_id, v.course_id, v.video_url, v.image_url, v.play_num,
+     v.detail from subject s inner join course c on s.id = c.subject_id inner join
+     video v on c.id = v.course_id where s.id = #{id}
+  </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -34,6 +62,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Update_By_Example_Where_Clause" >
     <where >
       <foreach collection="example.oredCriteria" item="criteria" separator="or" >

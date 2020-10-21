@@ -42,7 +42,7 @@
     <div class="zjd">
         <p>对不起，您要访问的页面不存在或已被删除!<br>
             本页面<span id="xy">10</span>秒之后将带您回到Y先生首页。</p>
-        <div class="tit">您还可以：<span><a href="${pageContext.request.contextPath}">Y先生视频首页</a></span></div>
+        <div class="tit">您还可以：<span><a href="${pageContext.request.contextPath}/user/show">Y先生视频首页</a></span></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -52,7 +52,7 @@
     intervalid = setInterval("fun()", 1000);
     function fun() {
         if (i == 0){
-            window.location.href = "${pageContext.request.contextPath}";
+            window.location.href = "${pageContext.request.contextPath}/user/show";
             clearInterval(intervalid);
         }
         xy.innerHTML = i;

@@ -35,7 +35,7 @@
                     'primary': true,
                     'callback': function () {
                         var param = {"id": id};
-                        $.post("speakerDel", param, function (data) {
+                        $.post("${pageContext.request.contextPath}/speaker/speakerDel", param, function (data) {
                             if (data == 'success') {
                                 Confirm.show('温馨提示：', '删除成功');
                                 $(Obj).parent().parent().remove();
@@ -46,7 +46,10 @@
                     }
                 }
             });
+            return false;
         }
+
+
     </script>
     <style type="text/css">
         th {
@@ -70,11 +73,10 @@
                 <li><a href="${pageContext.request.contextPath}/video/list">视频管理</a></li>
                 <li class="active"><a href="${pageContext.request.contextPath}/speaker/showSpeakerList">主讲人管理</a></li>
                 <li><a href="${pageContext.request.contextPath}/showCourseList">课程管理</a></li>
-
-
             </ul>
+
             <p class="navbar-text navbar-right">
-                <span>${sessionScope.userName}</span> <i class="glyphicon glyphicon-log-in"
+                <span>${sessionScope.userAccount2}</span> <i class="glyphicon glyphicon-log-in"
                                                          aria-hidden="true"></i>&nbsp;&nbsp;<a
                     href="${pageContext.request.contextPath}/admin/exit"
                     class="navbar-link">退出</a>
@@ -119,7 +121,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.rows}" var="speaker" varStatus="status">
+        <c:forEach items="${pageInfo.list}" var="speaker" varStatus="status">
             <tr>
                 <td>${status.index+1}</td>
                 <td>${speaker.speakerName}</td>
@@ -143,6 +145,25 @@
         <p:page url="${pageContext.request.contextPath}/speaker/showSpeakerList"></p:page>
     </div>
 </div>
+
+<nav aria-label="Page navigation" style="margin-left: 500px">
+    <ul class="pagination">
+        <li>
+            <a href="/speaker/showSpeakerList?pageNum=${pageInfo.pageNum - 1}" aria-label="Previous" onclick="queryVideo(${pageInfo.pageNum - 1})">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="/speaker/showSpeakerList?pageNum=1">1</a></li>
+        <li><a href="/speaker/showSpeakerList?pageNum=2">2</a></li>
+        <li><a href="/speaker/showSpeakerList?pageNum=3">3</a></li>
+        <li>
+            <a href="/speaker/showSpeakerList?pageNum=${pageInfo.pageNum + 1}" aria-label="Next")>
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
 </body>
 
 </html>

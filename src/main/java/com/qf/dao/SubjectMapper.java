@@ -4,8 +4,13 @@ import com.qf.pojo.Subject;
 import com.qf.pojo.SubjectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SubjectMapper {
+
+    Subject selectSubjectById(Integer id);
+
     int countByExample(SubjectExample example);
 
     int deleteByExample(SubjectExample example);

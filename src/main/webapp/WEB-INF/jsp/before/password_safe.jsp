@@ -85,7 +85,7 @@
     <menu>
         <div class="container clearfix">
             <ul class="clearfix f_left">
-                <li><a href="${pageContext.request.contextPath}">首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/show">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/course/course/1">课程</a></li>
                 <li><a href="#">关于我们</a></li>
                 <li class="menu_active"><a href="${pageContext.request.contextPath}/user/showMyProfile">个人中心</a></li>
@@ -96,12 +96,12 @@
             </div>
             <div id="user_bar">
                 <a href="user/showMyProfile">
-                    <c:if test="${empty user.imgUrl}">
+                    <c:if test="${empty user.imgurl}">
                         <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                     </c:if>
 
-                    <c:if test="${not empty user.imgUrl}">
-                        <img id="avatar" src="http://localhost:8080/Videos/userAvatar/${user.imgUrl}" alt="">
+                    <c:if test="${not empty user.imgurl}">
+                        <img id="avatar" src="http://localhost:8083/Videos/userAvatar/${user.imgurl}" alt="">
                     </c:if>
 
                 </a>
@@ -126,12 +126,12 @@
                 <div class="proflle_tab_workplace clearfix">
                     <div class="profile_avatar_area">
 
-                        <c:if test="${empty user.imgUrl}">
+                        <c:if test="${empty user.imgurl}">
                             <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                         </c:if>
 
-                        <c:if test="${not empty user.imgUrl}">
-                            <img id="avatar" width="180px" height="180px" src="http://localhost:8080/Videos/userAvatar/${user.imgUrl}" alt="">
+                        <c:if test="${not empty user.imgurl}">
+                            <img id="avatar" width="180px" height="180px" src="http://localhost:8083/video/${user.imgurl}" alt="">
                         </c:if>
 
                     </div>

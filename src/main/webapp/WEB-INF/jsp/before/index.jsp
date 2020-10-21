@@ -15,8 +15,33 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
     <link rel="icon" href="favicon.png" type="image/png"/>
     <title>在线公开课-Y先生教育|java|大数据|HTML5|python|UI|PHP视频教程</title>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/gVerify.js"></script>
+
+    <script>
+        function addFavorite2() {
+            var url = window.location;
+            var title = document.title;
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.indexOf("360se") > -1) {
+                alert("由于360浏览  器功能限制，请按 Ctrl+D 手动收藏！");
+            } else if (ua.indexOf("msie 8") > -1) {
+                window.external.AddToFavoritesBar(url, title); //IE8
+            } else if (document.all) {
+                try {
+                    window.external.addFavorite(url, title);
+                } catch (e) {
+                    alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
+                }
+            } else if (window.sidebar) {
+                window.sidebar.addPanel(title, url, "");
+            } else {
+                alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
+            }
+        }
+
+    </script>
+
     <script type="text/javascript">
 
         $(function () {
@@ -43,12 +68,13 @@
         <div id="regBlock" style="display:none;float:right">
             <a href="javascript:;" id="reg_open"><img src="${pageContext.request.contextPath}/img/we.png">注册</a>
             <a href="javascript:;" id="login_open"><img src="${pageContext.request.contextPath}/img/we.png">登录</a>
+            <a href="/admin/tologin">后台入口</a>
         </div>
 
         <div id="userBlock" style="display:none;float:right">
 
             <a href="javascript:;" id="loginout">退出</a>
-            <a href="user/showMyProfile" id="account">${sessionScope.userAccount}</a>
+            <a href="/user/showMyProfile" id="account">${sessionScope.userAccount}</a>
         </div>
 
         <a onclick="JavaScript:addFavorite2()"><img src="${pageContext.request.contextPath}/img/sc.png"
@@ -65,7 +91,7 @@
              onclick="location.href='${pageContext.request.contextPath}'" draggable="false">
         <ul class="text_13 f_right">
             <li>
-                <a href="#" target="_blank">首页</a>
+                <a href="/user/show" target="_blank">首页</a>
             </li>
             <li class="nav_down">
                 高端课程<img src="${pageContext.request.contextPath}/img/nav_down.png" alt="" draggable="false">
@@ -249,6 +275,7 @@
             <img src="${pageContext.request.contextPath}/img/logo.png" alt="" class="ma">
         </div>
         <div class="mask_content_body">
+
             <form id="loginForm" action="#">
                 <h3>快速登录</h3>
                 <input type="email" id="loginEmail" placeholder="请输入邮箱" name="email">
@@ -256,9 +283,10 @@
                 <div id="forget">
                     <a href="${pageContext.request.contextPath}/user/forgetPassword">忘记密码？</a>
                 </div>
-                <input type="submit" onclick="return commitLogin()" value="登&#x3000;录">
+                <input type="submit" onclick="return commitLogin();" value="登&#x3000;录">
             </form>
         </div>
+
         <div class="mask_content_footer">
             <span id="login_close">关&#x3000;闭</span>
         </div>
@@ -270,7 +298,8 @@
             <img src="${pageContext.request.contextPath}/img/logo.png" alt="" class="ma">
         </div>
         <div class="mask_content_body">
-            <form id="regForm" action="user/insertUser.action">
+
+            <form id="regForm" action="/user/insertUser">
                 <h3>新用户注册</h3>
                 <input type="email" id="regEmail" placeholder="请输入邮箱" name="email"><span id="emailMsg"></span>
                 <input type="password" id="regPsw" placeholder="请输入密码" name="password">
@@ -282,6 +311,7 @@
                 </div>
                 <input type="submit" onclick="return commitRegForm();" value="注&#x3000;册">
             </form>
+
         </div>
         <div class="mask_content_footer">
             <span id="reg_close">关&#x3000;闭</span>
@@ -292,5 +322,6 @@
 
 </body>
 
-<script src="${pageContext.request.contextPath}/js/index.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<%--<script src="/js/jquery-1.8.3.js"></script>--%>
 </html>

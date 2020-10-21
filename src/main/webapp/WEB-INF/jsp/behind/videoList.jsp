@@ -80,7 +80,7 @@
                 'Delete': {
                     'primary': true,
                     'callback': function () {
-                        //此处需要调用ajax
+                        //此处需要调用ajax,
                         var params = {
                             "id": id
                         };
@@ -155,6 +155,11 @@
             }
 
         }
+        
+        function queryVideo(pageNum) {
+            $("#pageNum").val(pageNum);
+            $("#queryFrom").submit();
+        }
     </script>
 </head>
 <body>
@@ -175,10 +180,9 @@
                 <li><a href="${pageContext.request.contextPath}/speaker/showSpeakerList">主讲人管理</a></li>
                 <li><a href="${pageContext.request.contextPath}/showCourseList">课程管理</a></li>
 
-
             </ul>
             <p class="navbar-text navbar-right">
-                <span>${sessionScope.userName}</span> <i class="glyphicon glyphicon-log-in"
+                <span>${sessionScope.userAccount2}</span> <i class="glyphicon glyphicon-log-in"
                                                          aria-hidden="true"></i>&nbsp;&nbsp;<a
                     href="${pageContext.request.contextPath}/admin/exit"
                     class="navbar-link">退出</a>
@@ -214,7 +218,8 @@
         <div class="col-md-4"></div>
         <div class="col-md-6">
             <!-- 查询相关组件 -->
-            <form class="navbar-form navbar-right" action="${pageContext.request.contextPath}/video/list" method="post">
+            <form id="queryFrom" class="navbar-form navbar-right" action="${pageContext.request.contextPath}/video/list" method="post">
+              <input type="text" name="pageNum" id="pageNum" hidden>
                 <input type="text" name="title" class="form-control" placeholder="标题" value="${queryVo.title}">
                 <div class="btn-group">
                     <button type="button" id="speakerName"
@@ -298,7 +303,8 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${page.rows}" var="video" varStatus="status">
+                <input type="text" name="pageNum" value="${pageInfo.pageNum}" hidden>
+            <c:forEach items="${pageInfo.list}" var="video" varStatus="status">
                 <tr>
                     <td><input type="checkbox" name="ids" value="${video.id}"
                                onclick="selectOne(this)"/></td>
@@ -325,11 +331,30 @@
 
     </form>
 </div>
+
 <div class="container">
     <div class="navbar-right" style="padding-right: 17px">
         <p:page url="${pageContext.request.contextPath}/video/list"></p:page>
     </div>
 </div>
+
+<nav aria-label="Page navigation" style="margin-left: 500px">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous" onclick="queryVideo(${pageInfo.pageNum - 1})">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="#" onclick="queryVideo(1)">1</a></li>
+        <li><a href="#" onclick="queryVideo(2)">2</a></li>
+        <li><a href="#" onclick="queryVideo(3)">3</a></li>
+        <li>
+            <a href="#" aria-label="Next" onclick="queryVideo(${pageInfo.pageNum + 1})">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
 
 </body>

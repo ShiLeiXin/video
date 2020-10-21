@@ -8,7 +8,37 @@
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.qf.pojo.Course" extends="BaseResultMap" >
     <result column="course_desc" property="courseDesc" jdbcType="LONGVARCHAR" />
+
+    <collection property="videoList" ofType="com.qf.pojo.Video">
+      <id column="video_id" property="id"></id>
+      <result column="title" property="title"></result>
+      <result column="time" property="time"></result>
+      <result column="speaker_id" property="speakerId"></result>
+      <result column="course_id" property="courseId"></result>
+      <result column="video_url" property="videoUrl"></result>
+      <result column="image_url" property="imageUrl"></result>
+      <result column="play_num" property="playNum"></result>
+      <result column="detail" property="detail" jdbcType="LONGVARCHAR"/>
+
+      <association property="speaker" javaType="com.qf.pojo.Speaker">
+        <id column="speaker_id" property="id" jdbcType="INTEGER" />
+        <result column="speaker_name" property="speakerName" jdbcType="VARCHAR" />
+        <result column="speaker_job" property="speakerJob" jdbcType="VARCHAR" />
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+        <result column="speaker_desc" property="speakerDesc" jdbcType="LONGVARCHAR" />
+      </association>
+    </collection>
   </resultMap>
+
+  <select id="findCourseById" resultMap="ResultMapWithBLOBs">
+         select c.id, c.course_title, c.course_desc, c.subject_id, v.id video_id, v.title,
+        v.time, v.speaker_id, v.course_id, v.video_url, v.image_url, v.play_num, v.detail,
+		s.speaker_name, s.speaker_desc, s.speaker_job, s.head_img_url
+        from course c inner join video v on c.id = v.course_id inner join speaker s on v.speaker_id = s.id
+         where c.id = #{id}
+  </select>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

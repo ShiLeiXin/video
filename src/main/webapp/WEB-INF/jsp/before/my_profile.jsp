@@ -29,23 +29,23 @@
     <menu>
         <div class="container clearfix">
             <ul class="clearfix f_left">
-                <li><a href="${pageContext.request.contextPath}">首页</a></li>
+                <li><a href="/user/show">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/course/course/1">课程</a></li>
                 <li><a href="#">关于我们</a></li>
                 <li class="menu_active"><a href="${pageContext.request.contextPath}/user/showMyProfile">个人中心</a></li>
             </ul>
             <div id="search_group">
-                <input type="text" placeholder="搜索课程">
+                <input type="text" placeholder="搜索课程" onclick="location.href='/course/'">
                 <span id="search"></span>
             </div>
             <div id="user_bar">
-                <a href="user/showMyProfile">
-                    <c:if test="${empty user.imgUrl}">
+                <a href="/user/showMyProfile">
+                    <c:if test="${empty user.imgurl}">
                         <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                     </c:if>
 
-                    <c:if test="${not empty user.imgUrl}">
-                        <img id="avatar" src="http://localhost:8081/video/${user.imgUrl}" alt="">
+                    <c:if test="${not empty user.imgurl}">
+                        <img id="avatar" src="http://localhost:8083/video/${user.imgurl}" alt="">
                     </c:if>
 
                 </a>
@@ -61,7 +61,7 @@
             <ul class="profile_tab_header f_left clearfix">
                 <li><a href="${pageContext.request.contextPath}/user/changeProfile">更改资料</a></li>
                 <li class="profile_tab_line">|</li>
-                <li><a href="${pageContext.request.contextPath}/user/changeAvatar">更改头像</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/changeAvatar?email=${user.email}">更改头像</a></li>
                 <li class="profile_tab_line">|</li>
                 <li><a href="${pageContext.request.contextPath}/user/passwordSafe">密码安全</a></li>
             </ul>
@@ -69,24 +69,24 @@
 
                 <div class="proflle_tab_workplace clearfix">
                     <div class="profile_avatar_area">
-                        <c:if test="${empty user.imgUrl}">
+                        <c:if test="${empty user.imgurl}">
                             <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                         </c:if>
 
-                        <c:if test="${not empty user.imgUrl}">
-                            <img id="avatar" width="180px" heigth="180px" src="http://localhost:8081/video/${user.imgUrl}" alt="">
+                        <c:if test="${not empty user.imgurl}">
+                            <img id="avatar" width="180px" heigth="180px" src="http://localhost:8083/video/${user.imgurl}" alt="">
                         </c:if>
                         <p>
-                            <c:if test="${not empty user.nickName}">
-                                <span>${user.nickName}</span>
+                            <c:if test="${not empty user.nickname}">
+                                <span>${user.nickname}</span>
                             </c:if>
-                            <c:if test="${empty user.nickName}">
+                            <c:if test="${empty user.nickname}">
                                 <span>${user.email}</span>
                             </c:if>
                             欢迎回来！</p>
                     </div>
                     <ul class="profile_ifo_area">
-                        <li><span class="dd">昵&#x3000;称：</span>${user.nickName}</li>
+                        <li><span class="dd">昵&#x3000;称：</span>${user.nickname}</li>
                         <li><span class="dd">性&#x3000;别：</span>
                             <c:if test="${user.sex=='woman'}">
                                 女

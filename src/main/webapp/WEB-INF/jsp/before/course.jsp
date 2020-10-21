@@ -24,7 +24,7 @@
             var title = document.title;
             var ua = navigator.userAgent.toLowerCase();
             if (ua.indexOf("360se") > -1) {
-                alert("由于360浏览器功能限制，请按 Ctrl+D 手动收藏！");
+                alert("由于360浏览  器功能限制，请按 Ctrl+D 手动收藏！");
             } else if (ua.indexOf("msie 8") > -1) {
                 window.external.AddToFavoritesBar(url, title); //IE8
             } else if (document.all) {
@@ -41,8 +41,6 @@
         }
 
         $(function () {
-
-
             //div 两个哪个显示呢？
             if (null != "${sessionScope.userAccount}" && "${sessionScope.userAccount}" != "") {
                 $("#regBlock").css("display", "none");
@@ -83,11 +81,11 @@
 </header>
 <nav class="w100">
     <div class="container">
-        <img src="${pageContext.request.contextPath}/img/logo.png" alt="Y先生教育的logo" onclick="location.href='index.html'"
+        <img src="${pageContext.request.contextPath}/img/logo.png" alt="Y先生教育的logo" onclick="location.href='/user/show'"
              draggable="false">
         <ul class="text_13 f_right">
             <li>
-                <a href="#">首页</a>
+                <a href="/user/show">首页</a>
             </li>
             <li class="nav_down">
                 高端课程<img src="${pageContext.request.contextPath}/img/nav_down.png" alt="" draggable="false">
@@ -110,6 +108,8 @@
         </ul>
     </div>
 </nav>
+
+
 <div id="app">
     <!--banner图-->
     <div class="banner"

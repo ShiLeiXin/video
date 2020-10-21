@@ -1,6 +1,8 @@
 function getRootPath() {
     var pathname = window.location.pathname.substring(1);
     var end = pathname.indexOf('/');
+
+    //左闭右开
     pathname = pathname.substring(0, end);
     return pathname;
 }
@@ -116,7 +118,7 @@ $("#regEmail").blur(function () {
     if (null != emailVal && "" != emailVal) {
         var params = {"email": emailVal};
         // alert(params);
-        $.post('/' + getRootPath() + "/user/validateEmail", params, function (data) {
+        $.post("/user/validateEmail", params, function (data) {
             if (data == "success") {
                 regIsCommitEmail = true;
                 $("#emailMsg").text("该邮箱可用").css("color", "green");
@@ -149,7 +151,7 @@ $("#regPswAgain").blur(function () {
 
 $("#loginout").click(function () {
 
-    $.get('/' + getRootPath() + "/user/loginOut", null, function () {
+    $.get("/user/loginOut", null, function () {
         $("#regBlock").css("display", "block");
         $("#userBlock").css("display", "none");
     });
@@ -159,6 +161,40 @@ $("#loginout").click(function () {
 var regIsCommitEmail = false;
 var regIsCommitPsw = false;
 var verifyCode;
+
+function commitLogin() {
+    var email = $("#loginEmail").val();
+    var password = $("#loginPassword").val();
+
+    if (null != email && email != "" && null != password && password != "") {
+        var params = $("#loginForm").serialize();
+        // alert(params);
+        // post要小写
+        $.post("/user/loginUser", params, function (data) {
+            // alert(data);
+            if ('success' == data) {
+
+                //登录框消失
+                $("#login").addClass("hidden");
+
+                $("#account").text($("#loginEmail").val());
+                //将注册的user信息展示
+                $("#regBlock").css("display", "none");
+                $("#userBlock").css("display", "block");
+
+                $("#isLogin").val(1);
+            } else {
+                alert("用户名或密码错误！");
+            }
+        });
+
+        return false;
+    }
+
+    alert("用户名或密码不能为空！")
+    return false;
+}
+
 
 function commitRegForm() {
 
@@ -171,7 +207,7 @@ function commitRegForm() {
 
         $.ajax({
 
-            url: '/' + getRootPath() + "/user/insertUser",
+            url: "/user/insertUser",
             data: $("#regForm").serialize(),
             type: "POST",
             success: function (data) {
@@ -179,11 +215,12 @@ function commitRegForm() {
                     //注册框消失
                     $("#reg").addClass("hidden");
 
-                    $("#account").text($("#regEmail").val());
+                    //$("#account").text($("#regEmail").val());
                     //将注册的user信息展示
-                    $("#regBlock").css("display", "none");
-                    $("#userBlock").css("display", "block");
-
+                   // $("#regBlock").css("display", "none");
+                    //$("#userBlock").css("display", "block");
+                    $("#login").removeClass("hidden");
+                    $("#loginEmail").val($("#regEmail").val());
                 }
             },
             error: function () {
@@ -202,33 +239,6 @@ function commitRegForm() {
 
 verifyCode = new GVerify("v_container");
 
-function commitLogin() {
-    // alert("login");
-    var email = $("#loginEmail").val();
-    var password = $("#loginPassword").val();
-    if (null != email && email != "" && null != password && password != "") {
-        var params = $("#loginForm").serialize();
-        // alert(params);
-        // post要小写
-        $.post('/' + getRootPath() + "/user/loginUser", params, function (data) {
-            // alert(data);
-            if (data == 'success') {
 
-                //登录框消失
-                $("#login").addClass("hidden");
 
-                $("#account").text($("#loginEmail").val());
-                //将注册的user信息展示
-                $("#regBlock").css("display", "none");
-                $("#userBlock").css("display", "block");
-
-                $("#isLogin").val(1);
-            }
-        });
-
-        return false;
-    }
-
-    return false;
-}
 

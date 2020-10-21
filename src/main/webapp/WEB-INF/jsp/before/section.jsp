@@ -30,7 +30,7 @@
             }
 
             //通过ajax更新播放次数
-            var params = {"id":"${video.id}", "playNum":"${video.playNum}"};
+            var params = {"id": "${video.id}", "playNum": "${video.playNum}"};
             $.post("${pageContext.request.contextPath}/video/updatePlayNum", params);
         });
     </script>
@@ -45,6 +45,56 @@
         <div id="regBlock" style="display:none;float:right">
             <a href="javascript:;" id="reg_open"><img src="${pageContext.request.contextPath}/img/we.png">注册</a>
             <a href="javascript:;" id="login_open"><img src="${pageContext.request.contextPath}/img/we.png">登录</a>
+        </div>
+
+        <!--登录注册弹出框-->
+        <div class="mask hidden" id="login">
+            <div class="mask_content">
+                <div class="mask_content_header">
+                    <img src="${pageContext.request.contextPath}/img/logo.png" alt="" class="ma">
+                </div>
+                <div class="mask_content_body">
+                    <form id="loginForm" action="#">
+                        <h3>快速登录</h3>
+                        <input type="email" id="loginEmail" placeholder="请输入邮箱" name="email">
+                        <input type="password" id="loginPassword" placeholder="请输入密码" name="password">
+                        <div id="forget">
+                            <a href="${pageContext.request.contextPath}/user/forgetPassword">忘记密码？</a>
+                            &#x3000;<a href="#" onclick="quickShow()">快速注册</a>
+                        </div>
+
+                        <input type="submit" onclick="return commitLogin()" value="登&#x3000;录">
+                    </form>
+                </div>
+                <div class="mask_content_footer">
+                    <span id="login_close">关&#x3000;闭</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mask hidden" id="reg">
+            <div class="mask_content">
+                <div class="mask_content_header">
+                    <img src="${pageContext.request.contextPath}/img/logo.png" alt="" class="ma">
+                </div>
+                <div class="mask_content_body">
+                    <form id="regForm" action="insertUser">
+                        <h3>新用户注册</h3>
+                        <input type="email" id="regEmail" placeholder="请输入邮箱" name="email"><span id="emailMsg"></span>
+                        <input type="password" id="regPsw" placeholder="请输入密码" name="password">
+                        <input type="password" id="regPswAgain" placeholder="请再次输入密码" name="psw_again"><span
+                            id="passMsg"></span>
+                        <div id="yzm" class="form-inline">
+                            <input type="text" name="yzm" style="width: 45%; display: inline-block;">
+                            <div id="v_container" style="width: 45%;height: 40px;float:right;"></div>
+                        </div>
+                        <input type="submit" onclick="return commitRegForm();" value="注&#x3000;册">
+                    </form>
+                </div>
+                <div class="mask_content_footer">
+                    <span id="reg_close">关&#x3000;闭</span>
+                </div>
+            </div>
         </div>
 
         <div id="userBlock" style="display:none;float:right">
@@ -63,11 +113,11 @@
 </header>
 <nav class="w100">
     <div class="container">
-        <img src="${pageContext.request.contextPath}/img/logo.png" alt="Y先生教育的logo" onclick="location.href='index.html'"
+        <img src="${pageContext.request.contextPath}/img/logo.png" alt="Y先生教育的logo" onclick="location.href='/user/show'"
              draggable="false">
         <ul class="text_13 f_right">
             <li>
-                <a href="http://chengjian100.com/" target="_blank">首页</a>
+                <a href="/user/show" target="_blank">首页</a>
             </li>
             <li class="nav_down">
                 高端课程<img src="${pageContext.request.contextPath}/img/nav_down.png" alt="" draggable="false">
@@ -84,9 +134,9 @@
                 <a href="#" target="_blank">在线公开课</a>
             </li>
             <li>
-                <a href="http://www.chengjian100.com/zhuanjiashizi/index.html" target="_blank">专家师资</a>
+                <a href="#" target="_blank">专家师资</a>
             </li>
-            <li><a href="http://www.chengjian100.com/zyxw/ " target="_blank">小禅院新闻</a></li>
+            <li><a href="# " target="_blank">小禅院新闻</a></li>
         </ul>
     </div>
 </nav>
@@ -148,7 +198,6 @@
 
         </div>
     </div>
-
 </div>
 
 <!--页脚-->
@@ -186,7 +235,7 @@
 
 <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/video.js"></script>
-<script src="${pageContext.request.contextPath}/js/index.js"></script>
+<script src="/js/index.js" type="text/javascript"></script>
 <%-- 
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <script src="${pageContext.request.contextPath}/js/axios.js"></script>
