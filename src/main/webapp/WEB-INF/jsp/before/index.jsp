@@ -47,8 +47,8 @@
 
         <div id="userBlock" style="display:none;float:right">
 
-            <a href="javascript:;" id="loginout">退出</a>
-            <a href="user/showMyProfile" id="account">${sessionScope.userAccount}</a>
+            <a href="${pageContext.request.contextPath}/user/loginout;" id="loginout">退出</a>
+            <a href="/video_project_war/user/showMyProfile" id="account">${sessionScope.userAccount}</a>
         </div>
 
         <a onclick="JavaScript:addFavorite2()"><img src="${pageContext.request.contextPath}/img/sc.png"
@@ -272,8 +272,8 @@
         <div class="mask_content_body">
             <form id="regForm" action="user/insertUser.action">
                 <h3>新用户注册</h3>
-                <input type="email" id="regEmail" placeholder="请输入邮箱" name="email"><span id="emailMsg"></span>
-                <input type="password" id="regPsw" placeholder="请输入密码" name="password">
+                <input type="email" id="regEmail" placoleholder="请输入邮箱" name="email"><span id="emailMsg"></span>
+                <input type="password" id="regPsw" placehder="请输入密码" name="password">
                 <input type="password" id="regPswAgain" placeholder="请再次输入密码" name="psw_again"><span
                     id="passMsg"></span>
                 <div id="yzm" class="form-inline">

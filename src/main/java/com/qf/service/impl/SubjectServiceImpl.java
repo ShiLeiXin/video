@@ -15,6 +15,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Autowired
     private SubjectMapper subjectMapper;
 
+
     public List<Subject> showSubject() {
         List<Subject> list = subjectMapper.selectByExample(null);
         return list;
@@ -22,9 +23,12 @@ public class SubjectServiceImpl implements SubjectService {
 
 
     @Override
-    public Subject selectAll(Integer id) {
+    public Subject selectSubjectById(Integer id) {
+        Subject subject = subjectMapper.selectSubjectById(id);
 
-        return  subjectMapper.selectAll(id);
+        return subject;
     }
 }
+
+
 

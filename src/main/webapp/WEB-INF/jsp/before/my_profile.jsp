@@ -40,12 +40,12 @@
             </div>
             <div id="user_bar">
                 <a href="user/showMyProfile">
-                    <c:if test="${empty user.imgUrl}">
+                    <c:if test="${empty user.imgurl}">
                         <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                     </c:if>
 
-                    <c:if test="${not empty user.imgUrl}">
-                        <img id="avatar" src="http://localhost:8081/video/${user.imgUrl}" alt="">
+                    <c:if test="${not empty user.imgurl}">
+                        <img id="avatar" src="http://localhost:8081/video/${user.imgurl}" alt="">
                     </c:if>
 
                 </a>
@@ -69,24 +69,24 @@
 
                 <div class="proflle_tab_workplace clearfix">
                     <div class="profile_avatar_area">
-                        <c:if test="${empty user.imgUrl}">
+                        <c:if test="${empty user.imgurl}">
                             <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                         </c:if>
 
-                        <c:if test="${not empty user.imgUrl}">
-                            <img id="avatar" width="180px" heigth="180px" src="http://localhost:8081/video/${user.imgUrl}" alt="">
+                        <c:if test="${not empty user.imgurl}">
+                            <img id="avatar" width="180px" heigth="180px" src="http://localhost:8081/video/${user.imgurl}" alt="">
                         </c:if>
                         <p>
-                            <c:if test="${not empty user.nickName}">
-                                <span>${user.nickName}</span>
+                            <c:if test="${not empty user.nickname}">
+                                <span>${user.nickname}</span>
                             </c:if>
-                            <c:if test="${empty user.nickName}">
+                            <c:if test="${empty user.nickname}">
                                 <span>${user.email}</span>
                             </c:if>
                             欢迎回来！</p>
                     </div>
                     <ul class="profile_ifo_area">
-                        <li><span class="dd">昵&#x3000;称：</span>${user.nickName}</li>
+                        <li><span class="dd">昵&#x3000;称：</span>${user.nickname}</li>
                         <li><span class="dd">性&#x3000;别：</span>
                             <c:if test="${user.sex=='woman'}">
                                 女

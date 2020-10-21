@@ -1,6 +1,5 @@
 package com.qf.dao;
 
-import com.qf.pojo.Course;
 import com.qf.pojo.Subject;
 import com.qf.pojo.SubjectExample;
 import java.util.List;
@@ -29,6 +28,7 @@ public interface SubjectMapper {
 
     int updateByPrimaryKey(Subject record);
 
-    Subject selectAll(Integer id);
+    Subject selectSubjectById(Integer id);
+
 
 }

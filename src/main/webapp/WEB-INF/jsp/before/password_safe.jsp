@@ -126,12 +126,12 @@
                 <div class="proflle_tab_workplace clearfix">
                     <div class="profile_avatar_area">
 
-                        <c:if test="${empty user.imgUrl}">
+                        <c:if test="${empty user.imgurl}">
                             <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                         </c:if>
 
-                        <c:if test="${not empty user.imgUrl}">
-                            <img id="avatar" width="180px" height="180px" src="http://localhost:8080/Videos/userAvatar/${user.imgUrl}" alt="">
+                        <c:if test="${not empty user.imgurl}">
+                            <img id="avatar" width="180px" height="180px" src="http://localhost:8080/Videos/userAvatar/${user.imgurl}" alt="">
                         </c:if>
 
                     </div>

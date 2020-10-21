@@ -23,21 +23,17 @@ public class SubjectController {
 
     @RequestMapping("course/course")
     public String showSubject(Model model) {
-
         List<Subject> list = subjectService.showSubject();
         model.addAttribute("subjectList",list);
-
         return "/before/index.jsp";
-
     }
 
-    @RequestMapping("course/course/{id}")
-    public String selectAll(@PathVariable(name="id") Integer id , Model model) {
-
-        Subject subject = subjectService.selectAll(id);
-
+    @RequestMapping(value = "course/course/{id}")
+    public String selectSubjectById(@PathVariable(name="id") Integer id , Model model) {
+        Subject subject = subjectService.selectSubjectById(id);
         model.addAttribute("subject",subject);
         return "/before/course.jsp";
     }
+
 
 }

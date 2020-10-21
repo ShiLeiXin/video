@@ -203,7 +203,7 @@ function commitRegForm() {
 verifyCode = new GVerify("v_container");
 
 function commitLogin() {
-    // alert("login");
+    //alert("login");
     var email = $("#loginEmail").val();
     var password = $("#loginPassword").val();
     if (null != email && email != "" && null != password && password != "") {
