@@ -67,7 +67,7 @@
 
         <div id="userBlock" style="display:none;float:right">
 
-            <a href="javascript:;" id="loginout">退出</a>
+            <a href="${pageContext.request.contextPath}/user/loginout" id="loginout">退出</a>
             <a href="${pageContext.request.contextPath}/user/showMyProfile" id="account">${sessionScope.userAccount}</a>
         </div>
 
@@ -142,7 +142,7 @@
                                         ${i.index+1}
                                     </c:if>
                                     <c:if test="${(i.index+1)<10}">
-                                        0${i.index+1}
+                                        ${i.index+1}
                                     </c:if> ${video.title}</p>
                                 <div class="classify-v-info">
                                     <span class="count" title="观看次数"><img

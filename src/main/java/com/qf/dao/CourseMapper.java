@@ -3,6 +3,8 @@ package com.qf.dao;
 import com.qf.pojo.Course;
 import com.qf.pojo.CourseExample;
 import java.util.List;
+
+import com.qf.pojo.Subject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -38,4 +40,6 @@ public interface CourseMapper {
     int updateByPrimaryKeyWithBLOBs(Course record);
 
     int updateByPrimaryKey(Course record);
+
+
 }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qf.dao.CourseMapper" >
-  <resultMap id="BaseResultMap" type="com.qf.pojo.Course" >
+
+    <resultMap id="BaseResultMap" type="com.qf.pojo.Course" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="course_title" property="courseTitle" jdbcType="VARCHAR" />
     <result column="subject_id" property="subjectId" jdbcType="INTEGER" />
   </resultMap>
+
   <resultMap id="ResultMapWithBLOBs" type="com.qf.pojo.Course" extends="BaseResultMap" >
     <result column="course_desc" property="courseDesc" jdbcType="LONGVARCHAR" />
 
@@ -261,4 +263,8 @@
       subject_id = #{subjectId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+
 </mapper>
