@@ -103,7 +103,6 @@
                                 <img id="preview">
                                 <br>
 
-
                                 <input type="submit" value="上传"/>
                             </div>
                         </form>

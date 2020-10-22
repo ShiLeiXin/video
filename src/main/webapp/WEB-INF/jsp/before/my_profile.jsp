@@ -35,7 +35,7 @@
                 <li class="menu_active"><a href="${pageContext.request.contextPath}/user/showMyProfile">个人中心</a></li>
             </ul>
             <div id="search_group">
-                <input type="text" placeholder="搜索课程" onclick="location.href='/course/'">
+                <input type="text" placeholder="搜索课程">
                 <span id="search"></span>
             </div>
             <div id="user_bar">

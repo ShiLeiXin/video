@@ -146,16 +146,17 @@
     </div>
 </div>
 
-<nav aria-label="Page navigation" style="margin-left: 500px">
+<nav aria-label="Page navigation" style="margin-left: 1000px">
     <ul class="pagination">
         <li>
             <a href="/speaker/showSpeakerList?pageNum=${pageInfo.pageNum - 1}" aria-label="Previous" onclick="queryVideo(${pageInfo.pageNum - 1})">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li><a href="/speaker/showSpeakerList?pageNum=1">1</a></li>
-        <li><a href="/speaker/showSpeakerList?pageNum=2">2</a></li>
-        <li><a href="/speaker/showSpeakerList?pageNum=3">3</a></li>
+        <c:forEach items="${pageInfo.navigatepageNums}" var="page">
+
+            <li><a href="/speaker/showSpeakerList?pageNum=page">1</a></li>
+        </c:forEach>
         <li>
             <a href="/speaker/showSpeakerList?pageNum=${pageInfo.pageNum + 1}" aria-label="Next")>
                 <span aria-hidden="true">&raquo;</span>

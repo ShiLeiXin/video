@@ -155,12 +155,15 @@
             }
 
         }
-        
+
         function queryVideo(pageNum) {
+            $("#navigatepage").css("background", "grey")
             $("#pageNum").val(pageNum);
             $("#queryFrom").submit();
         }
     </script>
+
+
 </head>
 <body>
 
@@ -183,7 +186,7 @@
             </ul>
             <p class="navbar-text navbar-right">
                 <span>${sessionScope.userAccount2}</span> <i class="glyphicon glyphicon-log-in"
-                                                         aria-hidden="true"></i>&nbsp;&nbsp;<a
+                                                             aria-hidden="true"></i>&nbsp;&nbsp;<a
                     href="${pageContext.request.contextPath}/admin/exit"
                     class="navbar-link">退出</a>
             </p>
@@ -218,8 +221,9 @@
         <div class="col-md-4"></div>
         <div class="col-md-6">
             <!-- 查询相关组件 -->
-            <form id="queryFrom" class="navbar-form navbar-right" action="${pageContext.request.contextPath}/video/list" method="post">
-              <input type="text" name="pageNum" id="pageNum" hidden>
+            <form id="queryFrom" class="navbar-form navbar-right" action="${pageContext.request.contextPath}/video/list"
+                  method="post">
+                <input type="text" name="pageNum" id="pageNum" hidden>
                 <input type="text" name="title" class="form-control" placeholder="标题" value="${queryVo.title}">
                 <div class="btn-group">
                     <button type="button" id="speakerName"
@@ -303,7 +307,7 @@
             </tr>
             </thead>
             <tbody>
-                <input type="text" name="pageNum" value="${pageInfo.pageNum}" hidden>
+            <input type="text" name="pageNum" value="${pageInfo.pageNum}" hidden>
             <c:forEach items="${pageInfo.list}" var="video" varStatus="status">
                 <tr>
                     <td><input type="checkbox" name="ids" value="${video.id}"
@@ -338,16 +342,18 @@
     </div>
 </div>
 
-<nav aria-label="Page navigation" style="margin-left: 500px">
+<nav aria-label="Page navigation" style="margin-left: 1000px">
     <ul class="pagination">
         <li>
             <a href="#" aria-label="Previous" onclick="queryVideo(${pageInfo.pageNum - 1})">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li><a href="#" onclick="queryVideo(1)">1</a></li>
-        <li><a href="#" onclick="queryVideo(2)">2</a></li>
-        <li><a href="#" onclick="queryVideo(3)">3</a></li>
+
+        <c:forEach items="${pageInfo.navigatepageNums }" var="page">
+            <li><a href="#" onclick="queryVideo(${page})" id="navigatepage">${page}</a></li>
+        </c:forEach>
+
         <li>
             <a href="#" aria-label="Next" onclick="queryVideo(${pageInfo.pageNum + 1})">
                 <span aria-hidden="true">&raquo;</span>
