@@ -33,7 +33,4 @@ public interface SubjectMapper {
 
     int updateByPrimaryKey(Subject record);
 
-    Subject selectSubjectById(Integer id);
-
-
 }
