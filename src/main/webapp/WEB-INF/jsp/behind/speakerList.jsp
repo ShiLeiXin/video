@@ -154,8 +154,7 @@
             </a>
         </li>
         <c:forEach items="${pageInfo.navigatepageNums}" var="page">
-
-            <li><a href="/speaker/showSpeakerList?pageNum=page">1</a></li>
+            <li><a href="/speaker/showSpeakerList?pageNum=${page}">${page}</a></li>
         </c:forEach>
         <li>
             <a href="/speaker/showSpeakerList?pageNum=${pageInfo.pageNum + 1}" aria-label="Next")>

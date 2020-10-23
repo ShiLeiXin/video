@@ -5,8 +5,10 @@ import com.qf.pojo.Subject;
 import com.qf.pojo.User;
 import com.qf.service.SubjectService;
 import com.qf.service.UserService;
+import com.qf.utils.ImageCut;
 import com.qf.utils.MailUtils;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +59,7 @@ public class UserController {
         List<User> users = null;
         users = userService.findByEmailAndPsw(user);
         httpSession.setAttribute("userAccount", user.getEmail());
-        httpSession.setMaxInactiveInterval(60*60*24*7);
+        httpSession.setMaxInactiveInterval(60 * 60 * 24 * 7);
 
         if (users.size() == 0) {
             return "error";
@@ -118,7 +120,15 @@ public class UserController {
     }
 
     @RequestMapping("upLoadImage")
-    public String upLoadImage(MultipartFile image_file, HttpSession httpSession) {
+    public String upLoadImage(MultipartFile image_file, HttpSession httpSession, String x1,
+                              String y1, String w,
+                              String h) {
+
+        Integer x11 = (int) Double.parseDouble(x1);
+        Integer y11 = (int) Double.parseDouble(y1);
+        Integer w1 = (int) Double.parseDouble(w);
+        Integer h1 = (int) Double.parseDouble(h);
+
 
         String path = "D:\\Program Files\\server\\apache-tomcat-8.5.41\\webapps\\video";
         File file = new File(path);
@@ -131,8 +141,16 @@ public class UserController {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         filename = uuid + filename;
 
+        File file1 = new File(path, filename);
+
+
         try {
-            image_file.transferTo(new File(path, filename));
+            image_file.transferTo(file1);
+
+            String path2 = path + "\\" + filename;
+            System.out.println(path2);
+            ImageCut imageCut = new ImageCut();
+            imageCut.cutImage(path2, x11, y11, w1, h1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -237,7 +255,7 @@ public class UserController {
     }
 
     @RequestMapping("validateEmailCode")
-    public String validateEmailCode(String code,String email,  HttpSession httpSession, Model model) {
+    public String validateEmailCode(String code, String email, HttpSession httpSession, Model model) {
         String validateCode = (String) httpSession.getAttribute("validateCode");
 
         if (code.equals(validateCode)) {
@@ -266,6 +284,7 @@ public class UserController {
 
     /**
      * 通过httpSession获取到对应用户的User类对象
+     *
      * @param httpSession
      * @return
      */
@@ -273,7 +292,7 @@ public class UserController {
         String userAccount = (String) httpSession.getAttribute("userAccount");
         List<User> users = userService.findByUserAccount(userAccount);
 
-       return users.get(0);
+        return users.get(0);
     }
 
 

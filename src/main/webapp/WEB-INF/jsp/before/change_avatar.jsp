@@ -91,6 +91,8 @@
                             <input type="hidden" id="y1" name="y1"/>
                             <input type="hidden" id="x2" name="x2"/>
                             <input type="hidden" id="y2" name="y2"/>
+                            <input type="hidden" id="w" name="w">
+                            <input type="hidden" id="h" name="h">
 
                             <p>第一步：请选择图像文件</p>
                             <div><input type="file" name="image_file" id="image_file" onchange="fileSelectHandler()"/>
